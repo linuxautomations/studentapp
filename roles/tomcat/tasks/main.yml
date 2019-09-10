@@ -56,7 +56,7 @@
     mode: 0755
 
 - name: Reload daemon 
-  shell: systemctl dameon-reload 
+  shell: systemctl daemon-reload 
 
 - name: Restart Tomcat 
   service:
