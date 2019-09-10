@@ -15,6 +15,10 @@
   set_fact:
     TOMCAT_VERSION: "{{out.stdout}}"
   
-- name: Print version 
-  debug:
-    msg: "{{TOMCAT_VERSION}}"
+- name: Download Tomcat 
+  unarchive:
+    src: http://apachemirror.wuchna.com/tomcat/tomcat-8/v{{TOMCAT_VERSION}}/bin/apache-tomcat-{{TOMCAT_VERSION}}.tar.gz 
+    dest: /home/student
+    remote_src: yes 
+  become_user: student
+
