@@ -66,12 +66,12 @@
 
 - name: Remove API 
   file:
-    path: /home/student/API 
+    path: /home/student/api
     state: absent 
   
 - name: Create API directory 
   file:
-    path: /home/student/API 
+    path: /home/student/api 
     state: directory 
   become_user: student 
 
@@ -89,7 +89,7 @@
 - name: Download API war 
   get_url:
     url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapi.war
-    dest: /home/student/API/studentapi.war 
+    dest: /home/student/api/studentapi.war 
   become_user: student 
 
 - name: Download api init 
