@@ -62,4 +62,47 @@
   service:
     name: tomcat 
     state: restarted 
+    enabled: yes 
 
+- name: Remove API 
+  file:
+    path: /home/student/API 
+    state: absent 
+  
+- name: Create API directory 
+  file:
+    path: /home/student/API 
+    state: directory 
+  become_user: student 
+
+- name: Copy DB env file 
+  copy:
+    src: db-details
+    dest: /home/student/.db-details 
+  become_user: student
+
+- name: Update bash_profile 
+  lineinfile:
+    path: /home/student/.bashrc
+    line: source /home/student/.db-details 
+
+- name: Download API war 
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapi.war
+    dest: /home/student/API/studentapi.war 
+  become_user: student 
+
+- name: Download api init 
+  get_url: 
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapi-init
+    dest: /etc/init.d/studentapi
+    mode: 0755 
+
+- name: Reload daemon  API 
+  shell: systemctl daemon-reload 
+
+- name: Restart API 
+  service:
+    name: studentapi
+    state: restarted 
+    enabled: yes 
