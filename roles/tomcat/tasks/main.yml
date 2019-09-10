@@ -14,7 +14,7 @@
 - name: Declare Variables 
   set_fact:
     TOMCAT_VERSION: "{{out.stdout}}"
-    TOMCAT_HOME: "/home/student/{{out.stdout}}"
+    TOMCAT_HOME: "/home/student/apache-tomcat-{{out.stdout}}"
   
 - name: Download Tomcat 
   unarchive:
