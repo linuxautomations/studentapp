@@ -1,0 +1,6 @@
+- name: Install Student App Stack 
+  hosts: all
+  become: yes 
+  roles
+    - apache
+    - tomcat

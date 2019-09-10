@@ -1,0 +1,20 @@
+- name: Install Web Server 
+  yum:
+    name: httpd 
+    state: installed
+
+- name: Copy proxy config 
+  copy:
+    src: proxy.conf
+    dest: /etc/httpd/conf.d/proxy.conf 
+
+- name: Download Default index page 
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/index.html
+    dest: /var/www/html/index.html
+    mode: 0644 
+
+- name: Restart Web Service 
+  service:
+    name: httpd 
+    state: restarted 
