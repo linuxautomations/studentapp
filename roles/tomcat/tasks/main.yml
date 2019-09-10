@@ -27,7 +27,6 @@
   file:
     path: "{{item}}"
     state: absent 
-    recurse: yes 
   loop:
     - "{{TOMCAT_HOME}}/webapps/student.war"
     - "{{TOMCAT_HOME}}/webapps/student"
