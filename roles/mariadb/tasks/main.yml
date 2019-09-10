@@ -6,7 +6,7 @@
 - name: Start MariaDB Server 
   service:
     name: mariadb 
-    state: restart
+    state: restarted
     enabled: yes 
 
 - name: Copy schema
