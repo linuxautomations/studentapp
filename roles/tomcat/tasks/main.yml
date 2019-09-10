@@ -14,6 +14,7 @@
 - name: Declare Variables 
   set_fact:
     TOMCAT_VERSION: "{{out.stdout}}"
+    TOMCAT_HOME: "/home/student/{{out.stdout}}"
   
 - name: Download Tomcat 
   unarchive:
@@ -22,3 +23,17 @@
     remote_src: yes 
   become_user: student
 
+- name: Remove old wars
+  file:
+    path: "{{item}}"
+    state: absent 
+    recurse: yes 
+  loop:
+    - "{{TOMCAT_HOME}}/webapps/student.war"
+    - "{{TOMCAT_HOME}}/webapps/student"
+
+- name: Download app war 
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+    dest: "{{TOMCAT_HOME}}/webapps/student.war"
+  
